@@ -31,34 +31,16 @@ export default function Home() {
     }
   });
   const [method, setMethod] = useState<string>("GET")
-
-  const getdata = async (): Promise<any> => {
-    try {
-      const result = await FetchData(url);
-      setData(result);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  };
-  const postdata = async (): Promise<any> => {
-    try {
-      console.log(url);
-      console.log(method)
-      const result = await PostData(options, url);
-      setData(result);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  }
   const executeRequest = async () => {
     try {
-      console.log(method);
 
       if (method === "GET") {
-        await getdata();
+        const result = await FetchData(url);
+        setData(result);
       }
       else if (method === "POST") {
-        await postdata();
+        const result = await PostData(options, url);
+        setData(result);
       }
     } catch (error) {
       throw new Error("Error in execute request");
