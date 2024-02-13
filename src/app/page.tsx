@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuRadioGroupDemo } from "@/components/DropdownMenuRadioGroupDemo";
 import { useEffect, useState } from "react";
 import { FetchData } from "@/utilis/api";
+import JsonViewer from "../components/jsonViewer/JsonView"
 
 export default function Home() {
   const [url, setUrl] = useState<string>("");
@@ -46,9 +47,13 @@ export default function Home() {
           />
         </div>
         <div className="m-1">
-          <Button variant="default" onClick={()=>url!==""?getdata():console.log("Please add url")}>
+          <Button variant="default" onClick={() => url !== "" ? getdata() : console.log("Please add url")}>
             Send
           </Button>
+        </div>
+        <div>
+          response
+          <JsonViewer data={data} />
         </div>
       </div>
     </div>
