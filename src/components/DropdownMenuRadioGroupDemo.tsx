@@ -1,7 +1,6 @@
 "use client"
-
 import * as React from "react"
-
+import { Dispatch, SetStateAction } from "react"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -13,17 +12,20 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function DropdownMenuRadioGroupDemo() {
-    const [position, setPosition] = React.useState("GET")
-
+interface DropdownMenuRadioGroupProps {
+    method: string;
+    setMethod: Dispatch<SetStateAction<string>>;
+}
+export function DropdownMenuRadioGroupDemo(props: DropdownMenuRadioGroupProps) {
+    const { method, setMethod } = props;
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="default">{position}</Button>
+                <Button variant="default">{method}</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+                <DropdownMenuRadioGroup value={method} onValueChange={setMethod}>
                     <DropdownMenuRadioItem value="GET">GET</DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="POST">POST</DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="PUT">PUT</DropdownMenuRadioItem>

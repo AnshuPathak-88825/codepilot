@@ -16,19 +16,54 @@ import { DropdownMenuRadioGroupDemo } from "@/components/DropdownMenuRadioGroupD
 import { useEffect, useState } from "react";
 import { FetchData } from "@/utilis/api";
 import JsonViewer from "../components/jsonViewer/JsonView"
+import { PostData } from "@/utilis/api";
+import { MehIcon } from "lucide-react";
+
 
 export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
-  const getdata = async () => {
+  const [options, setOption] = useState<any | null>([]);
+  const [method, setMethod] = useState<string>("GET")
+
+  const getdata = async (): Promise<any> => {
     try {
       const result = await FetchData(url);
-      console.log(result);
       setData(result);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
   };
+  const postdata = async (): Promise<any> => {
+    try {
+      const result = await PostData(options, url);
+      setData(result);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  }
+  const executeRequest = async () => {
+    try {
+      if (method === "GET") {
+        await getdata();
+      }
+      else if (method === "POST") {
+        await postdata();
+      }
+    } catch (error) {
+      throw new Error("Error in execute request");
+
+    }
+
+  }
+  const runmethod = async () => {
+    if (!url) {
+      console.log("Please provide Url");
+      return;
+    }
+    executeRequest();
+
+  }
   useEffect(() => { }, [url]);
 
   return (
@@ -36,7 +71,7 @@ export default function Home() {
       <ModeToggle />
       <div className="flex">
         <div className="m-1">
-          <DropdownMenuRadioGroupDemo />
+          <DropdownMenuRadioGroupDemo method={method} setMethod={setMethod} />
         </div>
         <div className="m-1">
           <Input
