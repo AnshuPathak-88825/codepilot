@@ -23,7 +23,13 @@ import { MehIcon } from "lucide-react";
 export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
-  const [options, setOption] = useState<any | null>([]);
+  const [options, setOption] = useState<any | null>({
+    "received": {
+      "name": "hello",
+      "email": "anshupathak@gmail.com",
+      "password": "12345678"
+    }
+  });
   const [method, setMethod] = useState<string>("GET")
 
   const getdata = async (): Promise<any> => {
@@ -36,6 +42,8 @@ export default function Home() {
   };
   const postdata = async (): Promise<any> => {
     try {
+      console.log(url);
+      console.log(method)
       const result = await PostData(options, url);
       setData(result);
     } catch (error) {
@@ -44,6 +52,8 @@ export default function Home() {
   }
   const executeRequest = async () => {
     try {
+      console.log(method);
+
       if (method === "GET") {
         await getdata();
       }
@@ -82,7 +92,7 @@ export default function Home() {
           />
         </div>
         <div className="m-1">
-          <Button variant="default" onClick={() => url !== "" ? getdata() : console.log("Please add url")}>
+          <Button variant="default" onClick={() => url !== "" ? runmethod() : console.log("Please add url")}>
             Send
           </Button>
         </div>
