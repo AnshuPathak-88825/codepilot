@@ -14,9 +14,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { DropdownMenuRadioGroupDemo } from "@/components/DropdownMenuRadioGroupDemo";
 import { useEffect, useState } from "react";
-import { FetchData } from "@/utilis/api";
+import { FetchData, PostData, PutData } from "@/utilis/api";
 import JsonViewer from "../components/jsonViewer/JsonView"
-import { PostData } from "@/utilis/api";
 import { MehIcon } from "lucide-react";
 
 
@@ -25,7 +24,7 @@ export default function Home() {
   const [data, setData] = useState<any | null>([]);
   const [options, setOption] = useState<any | null>({
     "received": {
-      "name": "hello",
+      "name": "anshuasf",
       "email": "anshupathak@gmail.com",
       "password": "12345678"
     }
@@ -40,6 +39,10 @@ export default function Home() {
       }
       else if (method === "POST") {
         const result = await PostData(options, url);
+        setData(result);
+      }
+      else if (method === "PUT") {
+        const result = await PutData(options, url);
         setData(result);
       }
     } catch (error) {

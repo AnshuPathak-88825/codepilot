@@ -1,14 +1,23 @@
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 export async function GET() {
-    return NextResponse.json({ "hello": "hello" })
+  return NextResponse.json({ hello: "hello" });
 }
 
 export async function POST(req: NextRequest) {
-    try {
-        const body = await req.json();
-        return NextResponse.json({ "received": body });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ "error": "Error occurred" }, { status: 500 });
-    }
+  try {
+    const body = await req.json();
+    return NextResponse.json({ received: body });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Error occurred" }, { status: 500 });
+  }
+}
+export async function PUT(req: NextRequest) {
+  try {
+    const body = await req.json();
+    return NextResponse.json({ received: body });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Error occured" }, { status: 500 });
+  }
 }

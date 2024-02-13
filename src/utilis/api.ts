@@ -14,7 +14,7 @@ export const PostData = async (Option: any, Url: string): Promise<any> => {
   const config = {
     withCredentials: true,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
   try {
@@ -23,4 +23,18 @@ export const PostData = async (Option: any, Url: string): Promise<any> => {
   } catch (error) {
     console.error("Error in Post  data:", AxiosError);
   }
-}
+};
+export const PutData = async (Option: any, Url: string): Promise<any> => {
+  const config = {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response: AxiosResponse<any> = await axios.put(Url, Option, config);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
