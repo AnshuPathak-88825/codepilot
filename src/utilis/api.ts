@@ -1,8 +1,18 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-interface ApiResponse { }
 export const FetchData = async (url: string): Promise<any> => {
   try {
-    const response: AxiosResponse<any> = await axios.get(url);
+    const config = {
+      withCredentials: true,
+      header: {
+        "Content-Type": "application/json",
+      }
+    }
+    const option={
+      url:url,
+      method:"GET"
+    }
+    const proxy="http://localhost:3000/api/proxy/";
+    const response: AxiosResponse<any> = await axios.post(proxy,option,config);
     return response;
   } catch (error) {
     const axiosError: any = error;
