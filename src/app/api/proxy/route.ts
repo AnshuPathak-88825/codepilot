@@ -23,13 +23,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                 [key: string]: any;
             }
-            let Option: OptionsClass = new OptionsClass(); // Initialize with an instance
+            let Option: OptionsClass = new OptionsClass();
 
             for (const element of cream.slice(1)) {
                 const [key, value] = element.split("=");
                 if (key.trim() === 'expires') {
                     const date = new Date(value);
-                    Option[key.trim()] = date; // Convert to ISO string
+                    Option[key.trim()] = date;
                 } else {
                     Option[key.trim()] = (value === undefined ? true : false);
                 }
@@ -41,7 +41,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
             NewOption.secure = Option.Secure;
             response.cookies.set(key, value, NewOption);
         });
-       
+        if (apidata.headers !== undefined && apidata.headers !== null) {
+            Object.keys(apidata.headers).forEach(key => {
+                const value = apidata.headers[key];
+                console.log(`${key}: ${value}`);
+                
+                if (value !== undefined && value !== null) {
+                    
+                    response.headers.set(key, value.toString());
+                }
+            });
+        }
         return response;
 
     } catch (error) {
