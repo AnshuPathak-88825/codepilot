@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 import connect from "../../../../db";
 import jwt from "jsonwebtoken"
 import { NextRequest, NextResponse } from "next/server";
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest, res: NextResponse) {
     try {
         await connect();
         const { email, username, password } = await request.json();
@@ -16,8 +16,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
             email, username, password: hashedPassword
         });
         await newUser.save();
-        const JWTSECRET=process.env.JWTSECRET;
-        return NextResponse.json({message:"User registed successfuly"});
+        const JWTSECRET=await process.env.JWTSECRET||"haslkdfsdf";
+        
+        const token=jwt.sign({email:newUser.email,id:newUser._id},JWTSECRET, { expiresIn: '1h' })
+        const response=NextResponse.json({newUser},{status:200});
+        response.cookies.set('codepilot',token,{httpOnly:true});
+        return response;
 
 
     } catch (error) {
