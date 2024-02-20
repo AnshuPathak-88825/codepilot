@@ -15,6 +15,9 @@ export async function POST(request: NextRequest, res: NextResponse) {
         const newUser: UserDocument | null = new User({
             email, username, password: hashedPassword
         });
+        if (!newUser) {
+            return NextResponse.json("Error creating user", { status: 500 });
+        }
         await newUser.save();
         const JWTSECRET=await process.env.JWTSECRET||"haslkdfsdf";
         
