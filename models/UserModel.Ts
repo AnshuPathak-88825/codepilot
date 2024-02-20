@@ -1,12 +1,18 @@
-import mongoose, { Document, Model } from "mongoose"
+import mongoose, { Document, Model } from "mongoose";
+import bcrypt from "bcrypt";
+// import connect from "../../../../db";
+import connect from "../db";
+
 const { Schema } = mongoose;
+
 interface UserAttributes {
-    username: string,
-    email: string,
-    password: string
+    username: string;
+    email: string;
+    password: string;
 }
-export interface UserDocument extends UserAttributes ,Document{}
-export interface UserModel extends Model<UserDocument>{}
+
+export interface UserDocument extends UserAttributes, Document {}
+export interface UserModel extends Model<UserDocument> {}
 
 const UserSchema = new Schema({
     username: {
@@ -14,7 +20,6 @@ const UserSchema = new Schema({
         required: true,
         unique: true,
         trim: true
-
     },
     email: {
         type: String,
@@ -28,5 +33,9 @@ const UserSchema = new Schema({
         required: true,
     }
 }, { timestamps: true });
-const User=mongoose.model<UserDocument,UserModel>("User",UserSchema);
-export default mongoose.model("User", UserSchema);
+
+const User = mongoose.models.User || mongoose.model<UserDocument, UserModel>("User", UserSchema);
+
+export default User;
+
+// Your POST controller code follows...

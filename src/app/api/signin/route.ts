@@ -4,10 +4,13 @@ import connect from "../../../../db";
 import User,{UserDocument,UserModel} from "../../../../models/UserModel";
 export async function POST(req:NextRequest,res:NextResponse)
 {
+    console.log("hello");
+
     try {
         await connect();
         const {email,password}=await req.json();
         const existingUser:UserDocument|null=await User.findOne({email});
+        console.log(existingUser);
         if(!existingUser)
         {
            return NextResponse.json("User not exist",{status:400});
