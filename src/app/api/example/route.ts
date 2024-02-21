@@ -55,9 +55,23 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
         // Save the updated user
 
-        return NextResponse.json({updatevalue});
+        return NextResponse.json({ updatevalue });
     } catch (error) {
         console.error("Error:", error);
         return NextResponse.json({ "error": "An error occurred while updating data" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req: NextRequest, res: NextResponse) {
+    try {
+        await connect();
+        const { email }: any = await req.json();
+        console.log(email);
+        const existingUser = await User.findOneAndDelete({ email });
+        const response = NextResponse.json({ "value": "Deleted value" }, { status: 400 })
+        return response;
+    } catch (error) {
+        const response=NextResponse.json({"Error":"Error in deletion"},{status:405});
+        return response;
     }
 }
