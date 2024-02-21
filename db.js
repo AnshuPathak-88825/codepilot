@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 const connect = async () => {
-    // const a = "mongodb+srv://AnshuPathak-88825:tWTdkc18ACkzOjYZ@cluster0.tjn5yjt.mongodb.net/";
     const URL=process.env.DATABASE_URL;
     try {
         await mongoose.connect(URL, {

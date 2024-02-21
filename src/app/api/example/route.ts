@@ -1,60 +1,63 @@
-// import { NextResponse, NextRequest } from "next/server";
-// import connect from "../../../../db";
-// import Post from "../../../../models/Post";
-// export async function GET() {
-//   // await connect();
-//   try {
-//     await connect();
-//     return NextResponse.json({ ee: "hello" });
-
-//   } catch (error) {
-//     throw console.error("not able to connect");
-    
-//   }
-// }
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import Test from "../../../../models/Test";
 import connect from "../../../../db";
+import User from "../../../../models/UserModel";
+export async function POST(req: NextRequest, res: NextResponse) {
+    try {
+        // Connect to the MongoDB database
+        await connect();
 
-export async function GET() {
-  try {
-    // Connect to the database
-    await connect();
+        // Extract email and username from the request body
+        const { email, username }: any = await req.json();
 
-    // Create a new post
-    // const newPost = new Post({
-    //   title: "Example Post",
-    //   description: "This is an example description for the post.",
-    // });
+        // Create a new instance of the Test model with the provided data
+        const newTest = new Test({ email, username });
 
-    // Save the new post to the database
-    // const savedPost = await newPost.save();
+        // Save the new document to the database
+        await newTest.save();
+        const response = NextResponse.json({ newTest });
 
-    // Return a success response
-    // return NextResponse.json({ message: "Post created successfully", post: savedPost });
-    
-  } catch (error) {
-    console.error("Error creating post:", error);
-    // Return an error response
-    return NextResponse.json({hello:"hello"});
-  }
+        // response.cookies.set("helo","hell");
+        return response;
+    } catch (error) {
+        // If an error occurs, respond with an error message
+        console.error("Error:", error);
+        return NextResponse.json({ error: "An error occurred while saving data" }, { status: 500 });
+    }
+}
+export async function GET(req: NextRequest, res: NextResponse) {
+    try {
+
+        return NextResponse.json({ "helo": "hello" });
+    } catch (error) {
+        return NextResponse.json({ "hello": "errro" });
+    }
 }
 
+export async function PUT(req: NextRequest, res: NextResponse) {
+    try {
+        await connect();
+        const { email, username }: any = await req.json();
 
-// export async function POST(req: NextRequest) {
-//   try {
-//     const body = await req.json();
-//     return NextResponse.json({ received: body });
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({ error: "Error occurred" }, { status: 500 });
-//   }
-// }
-// export async function PUT(req: NextRequest) {
-//   try {
-//     const body = await req.json();
-//     return NextResponse.json({ received: body });
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({ error: "Error occured" }, { status: 500 });
-//   }
-// }
+        // Check if the user exists
+        let userExist = await User.findOne({ email });
+
+        if (!userExist) {
+            return NextResponse.json({ "error": "User not found" }, { status: 400 });
+        }
+
+        let updatevalue = await User.findByIdAndUpdate(userExist._id, { email, username }, {
+            new: true,
+            runValidators: true,
+            useFindAndyModify: false
+        });
+
+
+        // Save the updated user
+
+        return NextResponse.json({updatevalue});
+    } catch (error) {
+        console.error("Error:", error);
+        return NextResponse.json({ "error": "An error occurred while updating data" }, { status: 500 });
+    }
+}
