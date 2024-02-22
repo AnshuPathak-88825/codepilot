@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DropdownMenuRadioGroupDemo } from "@/components/DropdownMenuRadioGroupDemo";
 import { useEffect, useState } from "react";
-import { FetchData, PostData, PutData } from "@/utilis/api";
+import { FetchData, PostData, PutData } from "@/utils/api";
 import JsonViewer from "../components/jsonViewer/JsonView"
 import { MehIcon } from "lucide-react";
 

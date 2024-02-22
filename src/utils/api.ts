@@ -9,9 +9,8 @@ export const FetchData = async (url: string): Promise<any> => {
     }
     const option={
       url:url,
-      method:"GET"
     }
-    const proxy="http://localhost:3000/api/proxy/";
+    const proxy="/api/proxy/get";
     const response: AxiosResponse<any> = await axios.post(proxy,option,config);
     return response;
   } catch (error) {
