@@ -66,12 +66,15 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
     try {
         await connect();
         const { email }: any = await req.json();
-        console.log(email);
         const existingUser = await User.findOneAndDelete({ email });
-        const response = NextResponse.json({ "value": "Deleted value" }, { status: 400 })
-        return response;
+        console.log(existingUser);
+        if (!existingUser) {
+            return NextResponse.json({ "hello": "user not found" }, { status: 200 });
+        }
+
+        return NextResponse.json({ "hello": "deleted value" }, { status: 200 });
     } catch (error) {
-        const response=NextResponse.json({"Error":"Error in deletion"},{status:405});
+        const response = NextResponse.json({ "Error": "Error in deletion" }, { status: 405 });
         return response;
     }
 }
