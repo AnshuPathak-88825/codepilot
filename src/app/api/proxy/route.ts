@@ -138,7 +138,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                     constructor(
                         public secure: boolean = false,
                         public httpOnly: boolean = false,
-                        public expires: number | Date | undefined = undefined // Adjust the type to be compatible
+                        public expires: number | Date | undefined = undefined
                     ) { }
 
                     [key: string]: any;
@@ -164,8 +164,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
             if (apidata.headers !== undefined && apidata.headers !== null) {
                 Object.keys(apidata.headers).forEach(key => {
                     const value = apidata.headers[key];
-                    // console.log(`${key}: ${value}`);
-
                     if (value !== undefined && value !== null) {
 
                         response.headers.set(key, value.toString());
