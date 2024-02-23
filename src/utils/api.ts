@@ -7,11 +7,11 @@ export const FetchData = async (url: string): Promise<any> => {
         "Content-Type": "application/json",
       }
     }
-    const option={
-      url:url,
+    const option = {
+      url: url,
     }
-    const proxy="/api/proxy/get";
-    const response: AxiosResponse<any> = await axios.post(proxy,option,config);
+    const proxy = "/api/proxy/get";
+    const response: AxiosResponse<any> = await axios.post(proxy, option, config);
     return response;
   } catch (error) {
     const axiosError: any = error;
@@ -19,18 +19,27 @@ export const FetchData = async (url: string): Promise<any> => {
     throw new Error("Error feteching data");
   }
 };
-export const PostData = async (Option: any, Url: string): Promise<any> => {
-  const config = {
-    withCredentials: true,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+export const PostData = async (info: any, Url: string): Promise<any> => {
   try {
-    const response: AxiosResponse<any> = await axios.post(Url, Option, config);
+    const Option = {
+      url: Url,
+      data: info
+    };
+    console.log(Option);
+    const proxy = "/api/proxy/post";
+    console.log(proxy);
+    const config = {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await axios.post(proxy, Option, config);
+    console.log(response);
     return response;
+
   } catch (error) {
-    console.error("Error in Post  data:", AxiosError);
+    console.log("getting error in post request");
   }
 };
 export const PutData = async (Option: any, Url: string): Promise<any> => {

@@ -24,8 +24,8 @@ export default function Home() {
   const [data, setData] = useState<any | null>([]);
   const [options, setOption] = useState<any | null>({
     "email": "anshu@example.com",
-    "password": "anshupathak",
-    "username": "RAJ"
+      "password": "anshupathak",
+      "username": "RAJ"
   });
   const [method, setMethod] = useState<string>("GET")
   const executeRequest = async () => {
