@@ -13,8 +13,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { DropdownMenuRadioGroupDemo } from "@/components/DropdownMenuRadioGroupDemo";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Deletedata, FetchData, PostData, PutData } from "@/utils/api";
+import { JsonEditor } from "@/components/jsonEditor/Editor";
 import JsonViewer from "../components/jsonViewer/JsonView"
 import { MehIcon } from "lucide-react";
 
@@ -87,6 +88,7 @@ export default function Home() {
           response
           <JsonViewer data={data} />
         </div>
+        <JsonEditor />
       </div>
     </div>
   );
