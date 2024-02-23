@@ -50,7 +50,6 @@ export const PutData = async (info: any, Url: string): Promise<any> => {
     };
     console.log(Option);
     const proxy = "/api/proxy/put";
-    console.log(proxy);
     const config = {
       withCredentials: true,
       headers: {
@@ -65,3 +64,21 @@ export const PutData = async (info: any, Url: string): Promise<any> => {
     console.log("getting error in post request");
   }
 };
+export const  Deletedata=async(info: any, Url: string):Promise<any>=>{
+  const proxy="/api/proxy/delete";
+  try {
+    const Option={
+      url:Url,
+      data:info
+    };
+    console.log("hllo");
+    const response=await axios.delete(proxy,{data:Option});
+    console.log(response);
+    console.log("hello");
+    return response;
+  } catch (error) {
+    console.log("error");
+    return "error";
+  }
+  
+}

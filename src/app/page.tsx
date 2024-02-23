@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DropdownMenuRadioGroupDemo } from "@/components/DropdownMenuRadioGroupDemo";
 import { useEffect, useState } from "react";
-import { FetchData, PostData, PutData } from "@/utils/api";
+import { Deletedata, FetchData, PostData, PutData } from "@/utils/api";
 import JsonViewer from "../components/jsonViewer/JsonView"
 import { MehIcon } from "lucide-react";
 
@@ -24,8 +24,8 @@ export default function Home() {
   const [data, setData] = useState<any | null>([]);
   const [options, setOption] = useState<any | null>({
     "email": "anshu@example.com",
-      "password": "anshupathak",
-      "username": "RAJ"
+    "password": "anshupathak",
+    "username": "RAJ"
   });
   const [method, setMethod] = useState<string>("GET")
   const executeRequest = async () => {
@@ -41,6 +41,10 @@ export default function Home() {
       }
       else if (method === "PUT") {
         const result = await PutData(options, url);
+        setData(result);
+      }
+      else if (method === "DELETE") {
+        const result = await Deletedata(options, url);
         setData(result);
       }
     } catch (error) {
