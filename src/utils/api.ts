@@ -42,17 +42,26 @@ export const PostData = async (info: any, Url: string): Promise<any> => {
     console.log("getting error in post request");
   }
 };
-export const PutData = async (Option: any, Url: string): Promise<any> => {
-  const config = {
-    withCredentials: true,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+export const PutData = async (info: any, Url: string): Promise<any> => {
   try {
-    const response: AxiosResponse<any> = await axios.put(Url, Option, config);
+    const Option = {
+      url: Url,
+      data: info
+    };
+    console.log(Option);
+    const proxy = "/api/proxy/put";
+    console.log(proxy);
+    const config = {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await axios.put(proxy, Option, config);
+    console.log(response);
     return response;
+
   } catch (error) {
-    throw error;
+    console.log("getting error in post request");
   }
 };
