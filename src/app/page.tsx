@@ -23,11 +23,9 @@ export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
   const [options, setOption] = useState<any | null>({
-    "received": {
-      "name": "anshuasf",
-      "email": "anshupathak@gmail.com",
-      "password": "12345678"
-    }
+    "email": "anshu@example.com",
+    "password": "anshupathak",
+    "username": "RAJ"
   });
   const [method, setMethod] = useState<string>("GET")
   const executeRequest = async () => {

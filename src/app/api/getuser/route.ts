@@ -23,14 +23,14 @@ export async function GET(req: NextRequest, res: NextResponse) {
             const existingUser: UserDocument | null = await User.findById(userId);
 
             if (!existingUser) {
-                return NextResponse.json({ "Error": "User not found" }, { status: 404 });
+                return NextResponse.json({ "Error": "User not found" });
             } else {
-                return NextResponse.json(existingUser, { status: 200 });
+                return NextResponse.json(existingUser);
             }
         });
         return response;
     } catch (error) {
         console.error("Internal server error:", error);
-        return NextResponse.json({ "Error": "Internal server error" }, { status: 500 });
+        return NextResponse.json({ "Error": "Internal server error" });
     }
 }
