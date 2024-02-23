@@ -1,4 +1,6 @@
 "use client";
+import { MutableRefObject } from 'react';
+
 import Image from "next/image";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Input } from "@/components/ui/input";
@@ -18,34 +20,43 @@ import { Deletedata, FetchData, PostData, PutData } from "@/utils/api";
 import { JsonEditor } from "@/components/jsonEditor/Editor";
 import JsonViewer from "../components/jsonViewer/JsonView"
 import { MehIcon } from "lucide-react";
+import { json } from "stream/consumers";
 
 
 export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
-  const [options, setOption] = useState<any | null>({
-    "email": "anshu@example.com",
-    "password": "anshupathak",
-    "username": "RAJ"
-  });
+  // const [options, setOption] = useState<any | null>({
+  //   "email": "anshu@example.com",
+  //   "password": "anshupathak",
+  //   "username": "RAJ"
+  // });
+  const options = useRef({});
+  console.log(options.current);
+  const addjson = (value: any) => {
+
+    options.current = value;
+  }
   const [method, setMethod] = useState<string>("GET")
   const executeRequest = async () => {
     try {
+      const optionObject = JSON.parse(JSON.stringify(options.current));
 
       if (method === "GET") {
         const result = await FetchData(url);
         setData(result);
       }
       else if (method === "POST") {
-        const result = await PostData(options, url);
+        const result = await PostData(optionObject, url);
         setData(result);
       }
       else if (method === "PUT") {
-        const result = await PutData(options, url);
+
+        const result = await PutData(optionObject, url);
         setData(result);
       }
       else if (method === "DELETE") {
-        const result = await Deletedata(options, url);
+        const result = await Deletedata(optionObject, url);
         setData(result);
       }
     } catch (error) {
@@ -88,7 +99,7 @@ export default function Home() {
           response
           <JsonViewer data={data} />
         </div>
-        <JsonEditor />
+        <JsonEditor addjson={addjson} />
       </div>
     </div>
   );
