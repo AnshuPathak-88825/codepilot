@@ -15,12 +15,12 @@ export const ResizablePanelWrapper = (props: props) => {
     
     return (
         <ResizablePanelGroup direction="horizontal" >
-            <ResizablePanel className="b-2 m-3">
+            <ResizablePanel className="b-2 m-3" defaultSize={34}>
                 <PromptEditor />
             </ResizablePanel>
 
             <ResizableHandle withHandle />
-            <ResizablePanel><JsonEditor addjson={props.addjson} /></ResizablePanel>
+            <ResizablePanel defaultSize={34}><JsonEditor addjson={props.addjson} /></ResizablePanel>
 
         </ResizablePanelGroup>
     )

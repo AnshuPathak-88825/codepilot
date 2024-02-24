@@ -100,10 +100,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div>
+        <div>
           response
           <JsonViewer data={data} />
-        </div> */}
+        </div>
         <ResizablePanelWrapper addjson={addjson} />
 
       </div>
