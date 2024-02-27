@@ -24,7 +24,7 @@ export const JsonEditor = (props: Props) => {
                 defaultLanguage='json'
                 defaultValue=""
                 onMount={handleEditorDidMount}
-                theme='vs-dark'
+                // theme='vs-dark'
                 onChange={handleEditorChange}
 
             />

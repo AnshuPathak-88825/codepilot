@@ -24,7 +24,7 @@ import { json, text } from "stream/consumers";
 
 import { ResizablePanelWrapper } from '@/section/ResizablePanelWrapper';
 
-
+import ResponseDrawer from "@/components/responseDrawer/responsecomponent"
 export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
@@ -49,6 +49,7 @@ export default function Home() {
       }
       else if (method === "POST") {
         const result = await PostData(optionObject, url);
+        console.log(result);
         setData(result);
       }
       else if (method === "PUT") {
@@ -103,6 +104,7 @@ export default function Home() {
         <div>
           response
           <JsonViewer data={data} />
+          <ResponseDrawer data={data} />
         </div>
         <ResizablePanelWrapper addjson={addjson} />
 

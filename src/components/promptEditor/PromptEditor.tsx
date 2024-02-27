@@ -26,7 +26,7 @@ const PromptEditor = (props: Props) => {
         try {
             setLoading(true)
             const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-            const result = await model.generateContent(promptvalue.current);
+            const result = await model.generateContent(`${promptvalue.current} generate json random value of givens schema `);
             const response = await result.response;
             const text = response.text();
             // console.log(text);
@@ -41,12 +41,32 @@ const PromptEditor = (props: Props) => {
 
     }
 
-
+    const schema = `const UserSchema = new Schema({
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true,
+            lowercase: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        }
+    }, { timestamps: true });
+    `;
 
     return (
         <div className="grid w-full  gap-2 p-1">
             <Textarea
-                placeholder="Type your message here."
+                placeholder={schema ? `${schema} add you schemm just like this` : `Some Placeholder Text`}
+
                 onChange={(e) => prompthandler(e.target.value)}
             />
             <Button

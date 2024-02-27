@@ -11,8 +11,8 @@ type props = {
     addjson: (value: any) => void
 }
 export const ResizablePanelWrapper = (props: props) => {
-    
-    
+
+
     return (
         <ResizablePanelGroup direction="horizontal" >
             <ResizablePanel className="b-2 m-3" defaultSize={34}>
@@ -20,7 +20,7 @@ export const ResizablePanelWrapper = (props: props) => {
             </ResizablePanel>
 
             <ResizableHandle withHandle />
-            <ResizablePanel defaultSize={34}><JsonEditor addjson={props.addjson} /></ResizablePanel>
+            <ResizablePanel defaultSize={34}><div className="m-4"><JsonEditor addjson={props.addjson} /></div></ResizablePanel>
 
         </ResizablePanelGroup>
     )
