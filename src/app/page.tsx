@@ -21,13 +21,15 @@ import { JsonEditor } from "@/components/jsonEditor/Editor";
 import JsonViewer from "../components/jsonViewer/JsonView"
 import { MehIcon } from "lucide-react";
 import { json, text } from "stream/consumers";
-
+import ResponseSection from '@/section/response';
 import { ResizablePanelWrapper } from '@/section/ResizablePanelWrapper';
 
 import ResponseDrawer from "@/components/responseDrawer/responsecomponent"
 export default function Home() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
+  const [responsevisible, setresponsevisible] = useState(false);
+
   // const [options, setOption] = useState<any | null>({
   //   "email": "anshu@example.com",
   //   "password": "anshupathak",
@@ -102,9 +104,11 @@ export default function Home() {
         </div>
 
         <div>
-          response
-          <JsonViewer data={data} />
-          <ResponseDrawer data={data} />
+          {responsevisible && <ResponseSection data={data} />}
+
+          <Button variant="default" onClick={() => setresponsevisible(!responsevisible)}>
+            {responsevisible ? "Hide response" : "Show response"}
+          </Button>
         </div>
         <ResizablePanelWrapper addjson={addjson} />
 

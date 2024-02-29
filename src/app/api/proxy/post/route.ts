@@ -9,6 +9,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         })
         const Header_cookie = apidata.headers["set-cookie"];
         const data = apidata.data
+        console.log(data);
+        
         const response = NextResponse.json({ data })
         console.log("hell before map");
         Header_cookie?.map(biscuit => {

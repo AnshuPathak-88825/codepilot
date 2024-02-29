@@ -34,7 +34,7 @@ const ResponseDrawer = (props: any) => {
                             </SheetDescription>
                         </SheetHeader>
                         <div className="grid gap-4 py-4">
-                        <JsonViewer data={props.data} /> 
+                        <JsonViewer data={props.data.data.data.data.data.data} /> 
                         </div>
 
                     </SheetContent>
