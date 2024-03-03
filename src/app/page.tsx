@@ -81,7 +81,6 @@ export default function Home() {
 
   return (
     <div className="  ">
-      <ModeToggle />
       <div className="flex-col">
         <div className='flex justify-center m-2'>
           <div className="m-1">
