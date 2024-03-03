@@ -1,7 +1,14 @@
+"use client"
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import ProfileButton from "./ProfileButton";
+
 const Navbar = () => {
+  const { data: session, status } = useSession();
+
     return (
         <div className="flex border-b mb-[50px]	justify-between		  ">
             <div className="font-bold p-4 ">
@@ -14,7 +21,8 @@ const Navbar = () => {
             <div className="flex justify-center items-center pr-8 ">
                 <div className="p-1"><ModeToggle /></div>
                 <div className="p-1">
-                    <Button>Signin</Button>
+                    {status==="unauthenticated"&&<Button onClick={() => signIn("github")}>Signin</Button>}
+                    {session?.user&&<ProfileButton user={session.user}/>}
                 </div>
             </div>
 
