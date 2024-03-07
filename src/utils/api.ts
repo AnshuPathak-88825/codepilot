@@ -12,7 +12,7 @@ export const FetchData = async (url: string): Promise<any> => {
     }
     const proxy = "/api/proxy/get";
     const response: AxiosResponse<any> = await axios.post(proxy, option, config);
-    return response;
+    return response.data;
   } catch (error) {
     const axiosError: any = error;
     console.error("Error feteching data:", AxiosError);
