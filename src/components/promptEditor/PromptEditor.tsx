@@ -105,7 +105,7 @@ const PromptEditor = (props: Props) => {
                 <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 Please wait
             </Button>}
-            {!loading && <div>
+            {!loading && data && <div>
                 <SyntaxHighlighter language="javascript" style={docco}>
                     {data}
                 </SyntaxHighlighter>
