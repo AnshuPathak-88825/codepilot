@@ -5,9 +5,10 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import ProfileButton from "./ProfileButton";
+import ResponsivePlayer from "./ResponsivePlayer";
 
 const Navbar = () => {
-  const { data: session, status } = useSession();
+    const { data: session, status } = useSession();
 
     return (
         <div className="flex border-b mb-[50px]	justify-between		  ">
@@ -21,8 +22,9 @@ const Navbar = () => {
             <div className="flex justify-center items-center pr-8 ">
                 <div className="p-1"><ModeToggle /></div>
                 <div className="p-1">
-                    {status==="unauthenticated"&&<Button onClick={() => signIn("github")}>Signin</Button>}
-                    {session?.user&&<ProfileButton user={session.user}/>}
+                    {status === "unauthenticated" && <Link href={"/login"}><Button variant="ghost" className="m-1" onClick={() => signIn("github")}>Signin</Button></Link>}
+                    {status === "unauthenticated" && <Link href={"/register"}><Button className="m-1" onClick={() => signIn("github")}>Signup</Button></Link>}
+                    {session?.user && <ProfileButton user={session.user} />}
                 </div>
             </div>
 

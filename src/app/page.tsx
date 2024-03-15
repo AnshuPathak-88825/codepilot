@@ -4,9 +4,8 @@ import Main from "@/section/main";
 import Navbar from "@/components/Navbar";
 const Home = () => {
   return (
-    <div>
+    <div className="pl-20 pr-20">
       <Navbar />
-
       <Main />
     </div>
   );

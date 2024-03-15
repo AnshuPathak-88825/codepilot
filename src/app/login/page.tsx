@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useRouter } from 'next/navigation'
 type Props = {};
 
-const Register = (props: Props) => {
+const Login = (props: Props) => {
     const router = useRouter()
     const { data: session, status } = useSession();
     useEffect(() => {
@@ -45,7 +45,7 @@ const Register = (props: Props) => {
                             </p>
                         </Link>
                     </div>
-                    <div className="text-center  text-xl ">Create account</div>
+                    <div className="text-center  text-xl ">Sign in</div>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="grid gap-2">
@@ -86,6 +86,10 @@ const Register = (props: Props) => {
                     <FaGithub className="m-2" size={16} />
                     GitHub
                 </Button>
+                <Link href="/guestuser"><Button className="w-full mt-2 mb-2"
+                    variant="outline"
+                    type="button"
+                    disabled={isLoading}>Guest User</Button></Link>
                 {/* <Button
                     className="w-full mt-2 mb-2"
                     variant="outline"
@@ -95,19 +99,15 @@ const Register = (props: Props) => {
                     <FaGoogle className="m-2" size={16} />
                     Google
                 </Button> */}
-                <Link href="/guestuser"><Button className="w-full mt-2 mb-2"
-                    variant="outline"
-                    type="button"
-                    disabled={isLoading}>Guest User</Button></Link>
                 <div className="relative mt-2 mb-2 cursor-pointer">
                     <div className="relative flex justify-center text-xs uppercase underline">
-                        <Link href="/login">
-                            <span className="bg-background px-2 text-muted-foreground">
-                                Already have an account? Sign In{" "}
-
-                            </span>
-                        </Link>
-
+                      <Link href="/register">
+                      <span className="bg-background px-2 text-muted-foreground">
+                            Do not have an account? Sign Up{" "}
+                            
+                        </span>
+                      </Link>
+                        
                     </div>
                 </div>
             </div>
@@ -115,4 +115,4 @@ const Register = (props: Props) => {
     );
 };
 
-export default Register;
+export default Login;

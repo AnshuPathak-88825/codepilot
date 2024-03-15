@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
-import {Button} from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
+import ResponsivePlayer from "./../components/ResponsivePlayer";
+
 type Props = {}
 
 const Main = (props: Props) => {
     return (
         <div>
-            <div className="flex border-2">
-                <div className="border-2" >
+            <div className="flex ">
+                <div className="m-5" >
                     <div className="text-4xl	font-bold ">
                         Rapid REST API Visualization: Test in Seconds
                     </div>
@@ -24,7 +26,9 @@ const Main = (props: Props) => {
                     </div>
                 </div>
                 <div className="border-2">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ksZpu1s1LV0?si=7ZnkBwNLqYC7mQom" title="YouTube video player" allow=" " ></iframe>
+                    <ResponsivePlayer/>
+                    {/* <iframe width="560" height="315" src="htt://www.youtube.com/embed/ksZpu1s1LV0?si=7ZnkBwNLqYC7mQom" title="YouTube video player" allow=" " ></iframe> */}
+                    
                 </div>
             </div>
         </div>
