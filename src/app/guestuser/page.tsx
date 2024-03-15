@@ -33,7 +33,7 @@ export default function GuestUser() {
   const [url, setUrl] = useState<string>("");
   const [data, setData] = useState<any | null>([]);
   const [responsevisible, setresponsevisible] = useState(false);
-
+  const [isLoading,setloading]=useState<boolean>(false);
   // const [options, setOption] = useState<any | null>({
   //   "email": "anshu@example.com",
   //   "password": "anshupathak",
@@ -50,21 +50,29 @@ export default function GuestUser() {
       const optionObject = JSON.parse(JSON.stringify(options.current));
 
       if (method === "GET") {
+        setloading(true)
         const result = await FetchData(url);
+        setloading(false)
+
         setData(result);
       }
       else if (method === "POST") {
+        setloading(true)
         const result = await PostData(optionObject, url);
+        setloading(false)
         console.log(result);
         setData(result);
       }
       else if (method === "PUT") {
-
+        setloading(true)
         const result = await PutData(optionObject, url);
+        setloading(false)
         setData(result);
       }
       else if (method === "DELETE") {
+        setloading(true)
         const result = await Deletedata(optionObject, url);
+        setloading(false)
         setData(result);
       }
     } catch (error) {
@@ -84,7 +92,7 @@ export default function GuestUser() {
   useEffect(() => { }, [url]);
 
   return (
-    <div className="  ">
+    <div className="p-12">
       <div className="flex-col">
         <div className='flex justify-center m-2'>
           <div className="m-1">
@@ -100,7 +108,7 @@ export default function GuestUser() {
             />
           </div>
           <div className="m-1">
-            <Button variant="default" onClick={() => url !== "" ? runmethod() : console.log("Please add url")}>
+            <Button disabled={isLoading} variant="default" onClick={() => url !== "" ? runmethod() : console.log("Please add url")}>
               Send
             </Button>
           </div>

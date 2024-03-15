@@ -25,7 +25,7 @@ const Main = (props: Props) => {
 
                     </div>
                 </div>
-                <div className="border-2 m-2">
+                <div className="border-2 m-2 rounded-md">
                     <ResponsivePlayer />
                     {/* <iframe width="560" height="315" src="htt://www.youtube.com/embed/ksZpu1s1LV0?si=7ZnkBwNLqYC7mQom" title="YouTube video player" allow=" " ></iframe> */}
 
