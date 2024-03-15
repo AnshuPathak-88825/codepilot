@@ -22,8 +22,8 @@ const Navbar = () => {
             <div className="flex justify-center items-center pr-8 ">
                 <div className="p-1"><ModeToggle /></div>
                 <div className="p-1">
-                    {status === "unauthenticated" && <Link href={"/login"}><Button variant="ghost" className="m-1" onClick={() => signIn("github")}>Signin</Button></Link>}
-                    {status === "unauthenticated" && <Link href={"/register"}><Button className="m-1" onClick={() => signIn("github")}>Signup</Button></Link>}
+                    {status === "unauthenticated" && <Link href={"/login"}><Button variant="ghost" className="m-1" >Signin</Button></Link>}
+                    {status === "unauthenticated" && <Link href={"/register"}><Button className="m-1" >Signup</Button></Link>}
                     {session?.user && <ProfileButton user={session.user} />}
                 </div>
             </div>
