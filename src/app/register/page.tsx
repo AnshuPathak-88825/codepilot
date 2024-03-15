@@ -25,8 +25,8 @@ const Register = (props: Props) => {
         <div className="flex h-screen items-center justify-center">
 
             <div className="w-1/4 ">
-                <div className="m-auto">
-                    <div className="m-auto border-2 items-center">Create account</div>
+                <div className="mb-2">
+                    <div className="text-center  text-xl ">Create account</div>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="grid gap-2">
